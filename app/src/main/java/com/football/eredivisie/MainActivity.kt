@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .replace(R.id.nav_host_fragment_content_main, StandingsFragment())
                     .addToBackStack(null)
                     .commit()
+                supportActionBar?.title = getString(R.string.menu_standings)
+                supportActionBar?.setIcon(R.drawable.ic_menu_standings)
             }
             // Handle other menu items if needed
         }
