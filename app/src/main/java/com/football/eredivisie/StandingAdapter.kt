@@ -19,12 +19,20 @@ class StandingAdapter(private val standings: List<Standing>) :
     override fun onBindViewHolder(holder: StandingViewHolder, position: Int) {
         val standing = standings[position]
         holder.positionTextView.text = standing.position.toString()
-        standing.team?.let { team ->
+        standing.team.let { team ->
             holder.teamNameTextView.text = team.name
         } ?: run {
             holder.teamNameTextView.text = "Unknown Team"
         }
         holder.pointsTextView.text = standing.points.toString()
+
+        // Alternar a cor das linhas
+        val backgroundColor = if (position % 2 == 0) {
+            R.color.defaultRowBackground
+        } else {
+            R.color.selectedRowBackground
+        }
+        holder.itemView.setBackgroundResource(backgroundColor)
     }
 
     override fun getItemCount(): Int = standings.size
