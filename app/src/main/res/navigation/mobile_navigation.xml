@@ -29,4 +29,10 @@
         android:label="@string/menu_standings"
         tools:layout="@layout/fragment_standings" />
 
+    <fragment
+        android:id="@+id/nav_teams"
+        android:name="com.football.eredivisie.ui.teams.TeamsFragment"
+        android:label="@string/menu_teams"
+        tools:layout="@layout/fragment_teams" />
+
 </navigation>

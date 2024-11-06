@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.football.eredivisie.ui.standings.StandingsFragment
+import com.football.eredivisie.ui.teams.TeamsFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,6 +43,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .commit()
                 supportActionBar?.title = getString(R.string.menu_standings)
                 supportActionBar?.setIcon(R.drawable.ic_menu_standings)
+            }
+            R.id.nav_teams -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, TeamsFragment())
+                    .addToBackStack(null)
+                    .commit()
+                supportActionBar?.title = getString(R.string.menu_teams)
+                supportActionBar?.setIcon(R.drawable.ic_menu_teams)
             }
             // Handle other menu items if needed
         }
