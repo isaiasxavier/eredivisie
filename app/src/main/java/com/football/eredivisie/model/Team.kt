@@ -1,5 +1,7 @@
 package com.football.eredivisie.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import java.util.Date
 
 data class Team(
@@ -14,4 +16,46 @@ data class Team(
     var clubColors: String? = null,
     var venue: String? = null,
     var lastUpdated: Date? = null
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readSerializable() as? Date
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
+        parcel.writeString(name)
+        parcel.writeString(shortName)
+        parcel.writeString(tla)
+        parcel.writeString(crest)
+        parcel.writeString(address)
+        parcel.writeString(website)
+        parcel.writeString(founded)
+        parcel.writeString(clubColors)
+        parcel.writeString(venue)
+        parcel.writeSerializable(lastUpdated)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Team> {
+        override fun createFromParcel(parcel: Parcel): Team {
+            return Team(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Team?> {
+            return arrayOfNulls(size)
+        }
+    }
+}

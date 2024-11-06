@@ -22,12 +22,24 @@ class TeamsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_teams, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(context, 3) // Ensure 3 columns
+        recyclerView.layoutManager = GridLayoutManager(context, 3)
 
         lifecycleScope.launch {
             try {
                 val teamsResponse = RetrofitInstance.api.getTeams()
-                val adapter = TeamsAdapter(teamsResponse.teams)
+                Log.d("TeamsFragment", "Teams loaded: ${teamsResponse.teams.size}")
+                val adapter = TeamsAdapter(teamsResponse.teams) { team ->
+                    val bundle = Bundle().apply {
+                        putParcelable("team", team)
+                    }
+                    val fragment = TeamDetailFragment().apply {
+                        arguments = bundle
+                    }
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.nav_host_fragment_content_main, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                }
                 recyclerView.adapter = adapter
             } catch (e: Exception) {
                 Log.e("TeamsFragment", "Error loading data", e)
