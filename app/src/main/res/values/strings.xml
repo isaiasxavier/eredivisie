@@ -10,4 +10,5 @@
     <string name="menu_home">Standings</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="failed_to_load_data">Failed to load data</string>
 </resources>

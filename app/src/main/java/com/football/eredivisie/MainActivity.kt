@@ -1,58 +1,59 @@
 package com.football.eredivisie
 
 import android.os.Bundle
-import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.football.eredivisie.databinding.ActivityMainBinding
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.football.eredivisie.model.Standing
+import com.football.eredivisie.model.Team
+import com.football.eredivisie.network.RetrofitInstance
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        setSupportActionBar(binding.appBarMain.toolbar)
+        lifecycleScope.launch {
+            try {
+                val standingsResponse = RetrofitInstance.api.getStanding()
+                val teamsResponse = RetrofitInstance.api.getTeams()
 
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+                Log.d("MainActivity", "Standings: ${standingsResponse.standings}")
+                Log.d("MainActivity", "Teams: ${teamsResponse.teams}")
+
+                val standings = standingsResponse.standings.flatMap { standingGroup ->
+                    standingGroup.table.map { tableEntry ->
+                        val team = tableEntry.team
+                        val updatedTeam = teamsResponse.teams.find { it.id == team.id }
+                        if (updatedTeam != null) {
+                            Log.d("MainActivity", "Found matching team: ${updatedTeam.name}")
+                        } else {
+                            Log.d("MainActivity", "No matching team found for id: ${team.id}")
+                        }
+                        Standing(
+                            position = tableEntry.position,
+                            team = updatedTeam ?: team,
+                            points = tableEntry.points
+                        )
+                    }
+                }
+
+                Log.d("MainActivity", "Processed Standings: $standings")
+
+                val adapter = StandingAdapter(standings)
+                recyclerView.adapter = adapter
+
+                Log.d("MainActivity", "Adapter set with item count: ${adapter.itemCount}")
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error loading data", e)
+            }
         }
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
