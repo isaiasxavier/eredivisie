@@ -35,4 +35,48 @@
         android:label="@string/menu_teams"
         tools:layout="@layout/fragment_teams" />
 
+    <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mobile_navigation"
+        app:startDestination="@+id/nav_home">
+
+        <fragment
+            android:id="@+id/nav_home"
+            android:name="com.football.eredivisie.ui.home.HomeFragment"
+            android:label="@string/menu_home"
+            tools:layout="@layout/fragment_home" />
+
+        <fragment
+            android:id="@+id/nav_gallery"
+            android:name="com.football.eredivisie.ui.gallery.GalleryFragment"
+            android:label="@string/menu_gallery"
+            tools:layout="@layout/fragment_gallery" />
+
+        <fragment
+            android:id="@+id/nav_slideshow"
+            android:name="com.football.eredivisie.ui.slideshow.SlideshowFragment"
+            android:label="@string/menu_slideshow"
+            tools:layout="@layout/fragment_slideshow" />
+
+        <fragment
+            android:id="@+id/nav_standings"
+            android:name="com.football.eredivisie.ui.standings.StandingsFragment"
+            android:label="@string/menu_standings"
+            tools:layout="@layout/fragment_standings" />
+
+        <fragment
+            android:id="@+id/nav_teams"
+            android:name="com.football.eredivisie.ui.teams.TeamsFragment"
+            android:label="@string/menu_teams"
+            tools:layout="@layout/fragment_teams" />
+
+        <!-- Add this fragment for MatchesFragment -->
+        <fragment
+            android:id="@+id/nav_matches"
+            android:name="com.football.eredivisie.ui.matches.MatchesFragment"
+            android:label="@string/menu_matches"
+            tools:layout="@layout/fragment_matches" />
+    </navigation>
+
 </navigation>

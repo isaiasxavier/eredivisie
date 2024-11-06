@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0">
+
+    <!-- Bandeira esquerda -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M5,2v8l4,-4l-4,-4zm1,8l4,-4v8H6z" />
+
+    <!-- Bandeira direita -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M13,2v8l4,-4l-4,-4zm1,8l4,-4v8h-4z" />
+
+    <!-- Hastes das bandeiras cruzadas -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M10,11L3,21h2l5,-7v7h2v-7l5,7h2l-7,-10z" />
+
+</vector>
