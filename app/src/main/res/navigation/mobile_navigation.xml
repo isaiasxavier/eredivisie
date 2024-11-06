@@ -22,4 +22,11 @@
         android:name="com.football.eredivisie.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_standings"
+        android:name="com.football.eredivisie.ui.standings.StandingsFragment"
+        android:label="@string/menu_standings"
+        tools:layout="@layout/fragment_standings" />
+
 </navigation>

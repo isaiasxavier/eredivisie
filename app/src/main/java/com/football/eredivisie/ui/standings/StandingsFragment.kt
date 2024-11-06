@@ -1,4 +1,4 @@
-package com.football.eredivisie.ui.home
+package com.football.eredivisie.ui.standings
 
 import android.os.Bundle
 import android.util.Log
@@ -9,25 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.football.eredivisie.R
 import com.football.eredivisie.StandingAdapter
-import com.football.eredivisie.databinding.FragmentHomeBinding
 import com.football.eredivisie.model.Standing
 import com.football.eredivisie.network.RetrofitInstance
 import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment() {
-
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+class StandingsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val recyclerView: RecyclerView = binding.recyclerView
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_standings, container, false)
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         lifecycleScope.launch {
@@ -51,15 +46,10 @@ class HomeFragment : Fragment() {
                 recyclerView.adapter = adapter
 
             } catch (e: Exception) {
-                Log.e("HomeFragment", "Error loading data", e)
+                Log.e("StandingsFragment", "Error loading data", e)
             }
         }
 
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return view
     }
 }

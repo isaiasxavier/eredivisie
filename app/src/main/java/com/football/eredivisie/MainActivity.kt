@@ -1,59 +1,57 @@
 package com.football.eredivisie
 
 import android.os.Bundle
-import android.util.Log
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.football.eredivisie.model.Standing
-import com.football.eredivisie.model.Team
-import com.football.eredivisie.network.RetrofitInstance
-import kotlinx.coroutines.launch
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import com.football.eredivisie.ui.standings.StandingsFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        lifecycleScope.launch {
-            try {
-                val standingsResponse = RetrofitInstance.api.getStanding()
-                val teamsResponse = RetrofitInstance.api.getTeams()
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        navView.setNavigationItemSelectedListener(this)
 
-                Log.d("MainActivity", "Standings: ${standingsResponse.standings}")
-                Log.d("MainActivity", "Teams: ${teamsResponse.teams}")
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+    }
 
-                val standings = standingsResponse.standings.flatMap { standingGroup ->
-                    standingGroup.table.map { tableEntry ->
-                        val team = tableEntry.team
-                        val updatedTeam = teamsResponse.teams.find { it.id == team.id }
-                        if (updatedTeam != null) {
-                            Log.d("MainActivity", "Found matching team: ${updatedTeam.name}")
-                        } else {
-                            Log.d("MainActivity", "No matching team found for id: ${team.id}")
-                        }
-                        Standing(
-                            position = tableEntry.position,
-                            team = updatedTeam ?: team,
-                            points = tableEntry.points
-                        )
-                    }
-                }
-
-                Log.d("MainActivity", "Processed Standings: $standings")
-
-                val adapter = StandingAdapter(standings)
-                recyclerView.adapter = adapter
-
-                Log.d("MainActivity", "Adapter set with item count: ${adapter.itemCount}")
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Error loading data", e)
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_standings -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, StandingsFragment())
+                    .addToBackStack(null)
+                    .commit()
             }
+            // Handle other menu items if needed
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 }
