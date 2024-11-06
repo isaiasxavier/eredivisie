@@ -1,22 +1,24 @@
 package com.football.eredivisie.ui.matches
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.football.eredivisie.MatchesAdapter
 import com.football.eredivisie.R
+import com.football.eredivisie.model.Match
 import com.football.eredivisie.network.RetrofitInstance
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class MatchesFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var matchesAdapter: MatchesAdapter
+    private var allMatches: List<Match> = emptyList()
+    private var showFutureMatches: Boolean = false // Alterado para false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,22 +38,53 @@ class MatchesFragment : Fragment() {
         fetchMatches()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_matches, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                showFutureMatches = !showFutureMatches
+                toggleMatches(showFutureMatches)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun fetchMatches() {
         lifecycleScope.launch {
             try {
                 val response = RetrofitInstance.api.getMatches()
-                val groupedMatches = mutableListOf<Any>()
-                response.matches.filter { it.status == "FINISHED" } // Filter only finished matches
-                    .groupBy { it.matchday }
-                    .toSortedMap(reverseOrder()) // Sort matchdays in descending order
-                    .forEach { (matchday, matches) ->
-                        groupedMatches.add("Matchday $matchday")
-                        groupedMatches.addAll(matches)
-                    }
-                matchesAdapter.updateMatches(groupedMatches)
+                allMatches = response.matches
+                toggleMatches(showFutureMatches) // Mostrar matches passados por padrão
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun toggleMatches(showFuture: Boolean) {
+        val filteredMatches = if (showFuture) {
+            allMatches.filter { it.utcDate.after(Date()) }.sortedBy { it.utcDate }
+        } else {
+            allMatches.filter { it.status == "FINISHED" }.sortedByDescending { it.utcDate }
+        }
+
+        val groupedMatches = mutableListOf<Any>()
+        filteredMatches.groupBy { it.matchday }
+            .toSortedMap(if (showFuture) naturalOrder() else reverseOrder())
+            .forEach { (matchday, matches) ->
+                groupedMatches.add("Match day $matchday")
+                groupedMatches.addAll(matches)
+            }
+        matchesAdapter.updateMatches(groupedMatches)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 }

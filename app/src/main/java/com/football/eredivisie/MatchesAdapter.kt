@@ -60,9 +60,8 @@ class MatchesAdapter(private var matches: List<Any>) :
     override fun getItemCount(): Int = matches.size
 
     fun updateMatches(newMatches: List<Any>) {
-        val oldSize = matches.size
         matches = newMatches
-        notifyItemRangeInserted(oldSize, newMatches.size - oldSize)
+        notifyDataSetChanged() // Notifica o RecyclerView sobre as mudanças nos dados
     }
 
     class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
