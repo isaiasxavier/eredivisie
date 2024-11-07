@@ -29,7 +29,6 @@
             app:navGraph="@navigation/mobile_navigation"
             app:defaultNavHost="true" />
 
-        <!-- Add this FragmentContainerView for MatchesFragment -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/matches_fragment_container"
             android:layout_width="0dp"

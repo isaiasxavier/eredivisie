@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "898873565672",
+    "project_id": "eredivisie-android-app",
+    "storage_bucket": "eredivisie-android-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898873565672:android:514fbc9ff5696a8a33445d",
+        "android_client_info": {
+          "package_name": "com.football.eredivisie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNOFgwEaY92j08Rn4pGAG1AB4t2TCu3g0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

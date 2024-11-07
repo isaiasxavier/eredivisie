@@ -1,5 +1,6 @@
 package com.football.eredivisie
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -11,6 +12,8 @@ import com.google.android.material.navigation.NavigationView
 import com.football.eredivisie.ui.matches.MatchesFragment
 import com.football.eredivisie.ui.standings.StandingsFragment
 import com.football.eredivisie.ui.teams.TeamsFragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -60,6 +63,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .commit()
                 supportActionBar?.title = getString(R.string.menu_matches)
                 supportActionBar?.setIcon(R.drawable.ic_menu_matches)
+            }
+            R.id.nav_logout -> {
+                Firebase.auth.signOut()
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
+                finish()
             }
             // Handle other menu items if needed
         }

@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.football.eredivisie" />
+                  <option name="mobileSdkAppId" value="1:898873565672:android:514fbc9ff5696a8a33445d" />
+                  <option name="projectId" value="eredivisie-android-app" />
+                  <option name="projectNumber" value="898873565672" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

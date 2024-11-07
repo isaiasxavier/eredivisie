@@ -14,4 +14,10 @@
     <string name="menu_matches">Matches</string>
     <string name="team_crest">Team Crest</string>
     <string name="failed_to_load_data">Failed to load data</string>
+    <string name="login">Login</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account_login_now">Already have an account? Login now</string>
+    <string name="click_to_register">Click to Register</string>
 </resources>
