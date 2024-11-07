@@ -15,7 +15,8 @@ data class Team(
     var founded: String? = null,
     var clubColors: String? = null,
     var venue: String? = null,
-    var lastUpdated: Date? = null
+    var lastUpdated: Date? = null,
+    var squad: List<Player> = emptyList() // Adicione esta linha
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
@@ -28,7 +29,8 @@ data class Team(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readSerializable() as? Date
+        parcel.readSerializable() as? Date,
+        parcel.createTypedArrayList(Player.CREATOR) ?: emptyList() // Adicione esta linha
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -43,6 +45,7 @@ data class Team(
         parcel.writeString(clubColors)
         parcel.writeString(venue)
         parcel.writeSerializable(lastUpdated)
+        parcel.writeTypedList(squad) // Adicione esta linha
     }
 
     override fun describeContents(): Int {

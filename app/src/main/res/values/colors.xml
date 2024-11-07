@@ -12,4 +12,6 @@
     <color name="headerBackground">#FFDDDDDD</color>
     <color name="defaultRowBackground">#FFFFFFFF</color>
     <color name="selectedRowBackground">#FFEEEEEE</color>
+    <color name="colorEvenRow">#F0F0F0</color>
+    <color name="colorOddRow">#FFFFFF</color>
 </resources>

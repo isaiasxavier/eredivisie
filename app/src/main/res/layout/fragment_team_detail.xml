@@ -3,88 +3,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".ui.teams.TeamDetailFragment">
 
-    <ImageView
-        android:id="@+id/teamCrestImageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+    <GridLayout
+        android:id="@+id/teamInfoGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:padding="16dp"
+        android:columnCount="1"
+        android:rowCount="7"
+        android:layout_margin="16dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/team_crest" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/teamNameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/teamCrestImageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textColor="@android:color/white"
-        android:padding="16dp" />
+        <ImageView
+            android:id="@+id/teamCrestImageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_rowSpan="2"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/team_crest"
+            android:layout_marginBottom="16dp" />
 
-    <TextView
-        android:id="@+id/teamAddressTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/teamNameTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:padding="8dp" />
+        <TextView
+            android:id="@+id/teamNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp" />
 
-    <TextView
-        android:id="@+id/teamWebsiteTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/teamAddressTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:padding="8dp" />
+        <TextView
+            android:id="@+id/teamAddressTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp" />
 
-    <TextView
-        android:id="@+id/teamFoundedTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/teamWebsiteTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:padding="8dp" />
+        <TextView
+            android:id="@+id/teamWebsiteTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp" />
 
-    <TextView
-        android:id="@+id/teamClubColorsTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/teamFoundedTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:padding="8dp" />
+        <TextView
+            android:id="@+id/teamFoundedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp" />
 
-    <TextView
-        android:id="@+id/teamVenueTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/teamClubColorsTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:padding="8dp" />
+        <TextView
+            android:id="@+id/teamClubColorsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp" />
 
+        <TextView
+            android:id="@+id/teamVenueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/staffButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="STAFF"
+            android:layout_marginTop="16dp" />
+    </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

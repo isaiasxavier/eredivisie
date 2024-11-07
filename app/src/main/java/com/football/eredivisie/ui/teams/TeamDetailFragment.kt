@@ -1,10 +1,10 @@
 package com.football.eredivisie.ui.teams
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -28,29 +28,29 @@ class TeamDetailFragment : Fragment() {
         val teamFoundedTextView: TextView = view.findViewById(R.id.teamFoundedTextView)
         val teamClubColorsTextView: TextView = view.findViewById(R.id.teamClubColorsTextView)
         val teamVenueTextView: TextView = view.findViewById(R.id.teamVenueTextView)
+        val staffButton: Button = view.findViewById(R.id.staffButton)
 
         team?.let {
-            Log.d("TeamDetailFragment", "Loading image URL: ${it.crest}")
-            Picasso.get()
-                .load(it.crest)
-                .error(R.drawable.error_image) // Ensure this drawable exists
-                .into(teamCrestImageView, object : com.squareup.picasso.Callback {
-                    override fun onSuccess() {
-                        Log.d("TeamDetailFragment", "Image loaded successfully: ${it.crest}")
-                    }
-
-                    override fun onError(e: Exception?) {
-                        Log.e("TeamDetailFragment", "Error loading image: ${it.crest}", e)
-                    }
-                })
+            Picasso.get().load(it.crest).into(teamCrestImageView)
             teamNameTextView.text = it.name
             teamAddressTextView.text = it.address
             teamWebsiteTextView.text = it.website
             teamFoundedTextView.text = it.founded
             teamClubColorsTextView.text = it.clubColors
             teamVenueTextView.text = it.venue
-        } ?: run {
-            Log.e("TeamDetailFragment", "Team data is null")
+        }
+
+        staffButton.setOnClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("team", team)
+            }
+            val fragment = TeamSquadFragment().apply {
+                arguments = bundle
+            }
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, fragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         return view
