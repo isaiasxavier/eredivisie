@@ -28,6 +28,7 @@ class TeamDetailFragment : Fragment() {
         val teamFoundedTextView: TextView = view.findViewById(R.id.teamFoundedTextView)
         val teamClubColorsTextView: TextView = view.findViewById(R.id.teamClubColorsTextView)
         val teamVenueTextView: TextView = view.findViewById(R.id.teamVenueTextView)
+        val teamCoachTextView: TextView = view.findViewById(R.id.teamCoachTextView)
         val staffButton: Button = view.findViewById(R.id.staffButton)
 
         team?.let {
@@ -38,6 +39,7 @@ class TeamDetailFragment : Fragment() {
             teamFoundedTextView.text = it.founded
             teamClubColorsTextView.text = it.clubColors
             teamVenueTextView.text = it.venue
+            teamCoachTextView.text = "Coach: ${it.coach?.name}" // Set the text with the label
         }
 
         staffButton.setOnClickListener {
