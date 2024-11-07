@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.football.eredivisie.R
 import com.football.eredivisie.model.Team
 import com.squareup.picasso.Picasso
+import kotlin.text.replace
 
 class TeamDetailFragment : Fragment() {
 
@@ -30,6 +31,7 @@ class TeamDetailFragment : Fragment() {
         val teamVenueTextView: TextView = view.findViewById(R.id.teamVenueTextView)
         val teamCoachTextView: TextView = view.findViewById(R.id.teamCoachTextView)
         val staffButton: Button = view.findViewById(R.id.staffButton)
+        val matchesButton: Button = view.findViewById(R.id.matchesButton)
 
         team?.let {
             Picasso.get().load(it.crest).into(teamCrestImageView)
@@ -47,6 +49,19 @@ class TeamDetailFragment : Fragment() {
                 putParcelable("team", team)
             }
             val fragment = TeamSquadFragment().apply {
+                arguments = bundle
+            }
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        matchesButton.setOnClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("team", team)
+            }
+            val fragment = TeamMatchesFragment().apply {
                 arguments = bundle
             }
             parentFragmentManager.beginTransaction()
