@@ -1,17 +1,17 @@
 # Overview
 
 <div style="display: flex; justify-content: space-around;">
-  <img src="images/Login.jpg" alt="Login" width="200">
-  <img src="images/Home.jpg" alt="Home" width="200">
-  <img src="images/Teams.jpg" alt="Teams" width="200">
-  <img src="images/Matches.jpg" alt="Matches" width="200">
+  <img src="img/Login.jpg" alt="Login" width="200">
+  <img src="img/Home.jpg" alt="Home" width="200">
+  <img src="img/Teams.jpg" alt="Teams" width="200">
+  <img src="img/Matches.jpg" alt="Matches" width="200">
 </div>
 
 <div style="display: flex; justify-content: space-around;">
-  <img src="images/Sidebar_Menu.jpg" alt="Sidebar Menu" width="200">
-  <img src="images/Staff.jpg" alt="Staff" width="200">
-  <img src="images/Standings.jpg" alt="Standings" width="200">
-  <img src="images/Team_Detail.jpg" alt="Team Detail" width="200">
+  <img src="img/Sidebar_Menu.jpg" alt="Sidebar Menu" width="200">
+  <img src="img/Staff.jpg" alt="Staff" width="200">
+  <img src="img/Standings.jpg" alt="Standings" width="200">
+  <img src="img/Team_Detail.jpg" alt="Team Detail" width="200">
 </div>
 
 
