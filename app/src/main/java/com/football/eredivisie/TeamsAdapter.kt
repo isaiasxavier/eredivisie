@@ -1,15 +1,14 @@
 package com.football.eredivisie.ui.teams
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.football.eredivisie.R
 import com.football.eredivisie.model.Team
-import com.squareup.picasso.Picasso
 
 class TeamsAdapter(private val teams: List<Team>, private val onItemClick: (Team) -> Unit) :
     RecyclerView.Adapter<TeamsAdapter.TeamViewHolder>() {
@@ -23,8 +22,10 @@ class TeamsAdapter(private val teams: List<Team>, private val onItemClick: (Team
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         val team = teams[position]
         holder.teamNameTextView.text = team.name
-        Log.d("TeamsAdapter", "Loading image URL: ${team.crest}")
-        Picasso.get().load(team.crest).into(holder.teamImageView)
+        Glide.with(holder.itemView.context)
+            .load(team.crest)
+            .into(holder.teamImageView)
+        holder.teamImageView.setBackgroundResource(R.drawable.frame_team)
         holder.itemView.setOnClickListener { onItemClick(team) }
     }
 

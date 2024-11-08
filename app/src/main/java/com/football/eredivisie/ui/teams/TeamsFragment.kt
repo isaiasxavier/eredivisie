@@ -22,7 +22,7 @@ class TeamsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_teams, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(context, 3)
+        recyclerView.layoutManager = GridLayoutManager(context, 3) // 3 colunas
 
         lifecycleScope.launch {
             try {
