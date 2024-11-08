@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.football.eredivisie.ui.home.HomeFragment
 import com.football.eredivisie.ui.matches.MatchesFragment
 import com.football.eredivisie.ui.standings.StandingsFragment
 import com.football.eredivisie.ui.teams.TeamsFragment
@@ -43,44 +44,61 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val userEmailTextView: TextView = headerView.findViewById(R.id.textView)
         val currentUser = Firebase.auth.currentUser
         userEmailTextView.text = currentUser?.email ?: "No email"
+
+        // Verifica se deve mostrar o HomeFragment
+        if (intent.getBooleanExtra("showHome", false)) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, HomeFragment.newInstance())
+                .commit()
+            supportActionBar?.title = getString(R.string.menu_home)
+            supportActionBar?.setIcon(R.drawable.ic_menu_home)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_standings -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment_content_main, StandingsFragment())
-                    .addToBackStack(null)
-                    .commit()
-                supportActionBar?.title = getString(R.string.menu_standings)
-                supportActionBar?.setIcon(R.drawable.ic_menu_standings)
-            }
-            R.id.nav_teams -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment_content_main, TeamsFragment())
-                    .addToBackStack(null)
-                    .commit()
-                supportActionBar?.title = getString(R.string.menu_teams)
-                supportActionBar?.setIcon(R.drawable.ic_menu_teams)
-            }
-            R.id.nav_matches -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment_content_main, MatchesFragment())
-                    .addToBackStack(null)
-                    .commit()
-                supportActionBar?.title = getString(R.string.menu_matches)
-                supportActionBar?.setIcon(R.drawable.ic_menu_matches)
-            }
-            R.id.nav_logout -> {
-                Firebase.auth.signOut()
-                val intent = Intent(this, Login::class.java)
-                startActivity(intent)
-                finish()
-            }
+    when (item.itemId) {
+        R.id.nav_home -> {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, HomeFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
+            supportActionBar?.title = getString(R.string.menu_home)
+            supportActionBar?.setIcon(R.drawable.ic_menu_home)
         }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
+        R.id.nav_standings -> {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, StandingsFragment())
+                .addToBackStack(null)
+                .commit()
+            supportActionBar?.title = getString(R.string.menu_standings)
+            supportActionBar?.setIcon(R.drawable.ic_menu_standings)
+        }
+        R.id.nav_teams -> {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, TeamsFragment())
+                .addToBackStack(null)
+                .commit()
+            supportActionBar?.title = getString(R.string.menu_teams)
+            supportActionBar?.setIcon(R.drawable.ic_menu_teams)
+        }
+        R.id.nav_matches -> {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, MatchesFragment())
+                .addToBackStack(null)
+                .commit()
+            supportActionBar?.title = getString(R.string.menu_matches)
+            supportActionBar?.setIcon(R.drawable.ic_menu_matches)
+        }
+        R.id.nav_logout -> {
+            Firebase.auth.signOut()
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
+    drawerLayout.closeDrawer(GravityCompat.START)
+    return true
+}
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

@@ -30,6 +30,7 @@ class Login : AppCompatActivity() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("showHome", true)
             startActivity(intent)
             finish()
         }
@@ -66,6 +67,7 @@ class Login : AppCompatActivity() {
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra("showHome", true)
                             startActivity(intent)
                             finish()
                         } else {
