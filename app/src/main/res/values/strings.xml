@@ -23,4 +23,12 @@
     <string name="logout">Logout</string>
     <string name="eredivisie_logo_desc">eredivisie_logo</string>
     <string name="standings_home">standings_home</string>
+    <string name="teams_home">teams_home</string>
+    <string name="matches_home">matches_home</string>
+    <string name="profile_home">profile_home</string>
+    <string name="profile">PROFILE</string>
+    <string name="standings">STANDINGS</string>
+    <string name="matches">MATCHES</string>
+    <string name="teams">TEAMS</string>
+    <string name="developed_by_isaias_xavier">Developed by Isaias Xavier ©</string>
 </resources>

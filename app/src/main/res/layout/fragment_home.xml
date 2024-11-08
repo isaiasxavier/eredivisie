@@ -5,55 +5,171 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <TextView
+        android:id="@+id/developerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/developed_by_isaias_xavier"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp" />
+
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnCount="2"
-        android:rowCount="2"
-        android:layout_margin="16dp">
+        android:rowCount="4"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/developerText">
 
-        <View
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:background="@android:color/holo_blue_light"
-            android:layout_margin="8dp" />
+            android:layout_margin="8dp"
+            android:layout_marginTop="10dp">
 
-        <ImageView
-            android:id="@+id/standingsHome"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/frame_home"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/profileHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/profile_home"
+                android:scaleType="centerInside" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
             android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:contentDescription="@string/standings_home"
-            android:scaleType="centerInside"
-            android:layout_margin="8dp" />
+            android:layout_margin="8dp"
+            android:layout_marginTop="10dp">
 
-        <View
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/frame_home"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/standingsHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/standings_home"
+                android:scaleType="centerInside" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="1"
+            android:text="@string/profile"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="1"
+            android:text="@string/standings"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="10dp" />
+
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="1"
+            android:layout_row="2"
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:background="@android:color/holo_orange_light"
-            android:layout_margin="8dp" />
+            android:layout_margin="8dp"
+            android:layout_marginTop="10dp">
 
-        <View
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/frame_home"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/matchesHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/matches_home"
+                android:scaleType="centerInside" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="1"
+            android:layout_row="2"
             android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:background="@android:color/holo_red_light"
-            android:layout_margin="8dp" />
+            android:layout_margin="8dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/frame_home"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/teamsHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/teams_home"
+                android:scaleType="centerInside" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="1"
+            android:text="@string/matches"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_rowWeight="0"
+            android:layout_columnWeight="1"
+            android:text="@string/teams"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="10dp" />
     </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
