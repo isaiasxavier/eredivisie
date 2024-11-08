@@ -3,15 +3,16 @@ package com.football.eredivisie
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
 import com.football.eredivisie.ui.matches.MatchesFragment
 import com.football.eredivisie.ui.standings.StandingsFragment
 import com.football.eredivisie.ui.teams.TeamsFragment
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        // Atualiza o email do usuário no cabeçalho do menu
+        val headerView = navView.getHeaderView(0)
+        val userEmailTextView: TextView = headerView.findViewById(R.id.textView)
+        val currentUser = Firebase.auth.currentUser
+        userEmailTextView.text = currentUser?.email ?: "No email"
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -70,7 +77,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
                 finish()
             }
-            // Handle other menu items if needed
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
