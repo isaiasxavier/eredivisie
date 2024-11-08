@@ -4,18 +4,16 @@
   <img src="images/Login.jpg" alt="Login" width="200">
   <img src="images/Home.jpg" alt="Home" width="200">
   <img src="images/Teams.jpg" alt="Teams" width="200">
-</div>
-
-<div style="display: flex; justify-content: space-around;">
   <img src="images/Matches.jpg" alt="Matches" width="200">
-  <img src="images/Sidebar_menu.jpg" alt="Sidebar Menu" width="200">
-  <img src="images/Staff.jpg" alt="Staff" width="200">
 </div>
 
 <div style="display: flex; justify-content: space-around;">
+  <img src="images/Sidebar_Menu.jpg" alt="Sidebar Menu" width="200">
+  <img src="images/Staff.jpg" alt="Staff" width="200">
   <img src="images/Standings.jpg" alt="Standings" width="200">
-  <img src="images/Team_detail.jpg" alt="Team Detail" width="200">
+  <img src="images/Team_Detail.jpg" alt="Team Detail" width="200">
 </div>
+
 
 **Eredivisie Tracker** is an app for Android dedicated to Eredivisie enthusiasts who want to stay updated on league 
 standings, recent and upcoming matches, team details, and more. With a user-friendly interface, users can create an account, log in, and personalize their experience by following specific teams to receive personalized notifications.
