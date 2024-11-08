@@ -3,14 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <!-- Adiciona um espaçamento de 20dp no topo -->
-    <item
-        android:id="@+id/space_top"
-        android:title=""
-        android:enabled="false"
-        android:icon="@android:color/transparent"
-        android:layout_height="20dp" />
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_logout"

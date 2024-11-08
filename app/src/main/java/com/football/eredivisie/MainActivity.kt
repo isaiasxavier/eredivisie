@@ -2,6 +2,7 @@ package com.football.eredivisie
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -40,10 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         // Atualiza o email do usuário no cabeçalho do menu
-        val headerView = navView.getHeaderView(0)
-        val userEmailTextView: TextView = headerView.findViewById(R.id.textView)
-        val currentUser = Firebase.auth.currentUser
-        userEmailTextView.text = currentUser?.email ?: "No email"
+        updateNavHeader()
 
         // Verifica se deve mostrar o HomeFragment
         if (intent.getBooleanExtra("showHome", false)) {
@@ -55,50 +53,70 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-        R.id.nav_home -> {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, HomeFragment.newInstance())
-                .addToBackStack(null)
-                .commit()
-            supportActionBar?.title = getString(R.string.menu_home)
-            supportActionBar?.setIcon(R.drawable.ic_menu_home)
-        }
-        R.id.nav_standings -> {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, StandingsFragment())
-                .addToBackStack(null)
-                .commit()
-            supportActionBar?.title = getString(R.string.menu_standings)
-            supportActionBar?.setIcon(R.drawable.ic_menu_standings)
-        }
-        R.id.nav_teams -> {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, TeamsFragment())
-                .addToBackStack(null)
-                .commit()
-            supportActionBar?.title = getString(R.string.menu_teams)
-            supportActionBar?.setIcon(R.drawable.ic_menu_teams)
-        }
-        R.id.nav_matches -> {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, MatchesFragment())
-                .addToBackStack(null)
-                .commit()
-            supportActionBar?.title = getString(R.string.menu_matches)
-            supportActionBar?.setIcon(R.drawable.ic_menu_matches)
-        }
-        R.id.nav_logout -> {
-            Firebase.auth.signOut()
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-            finish()
+    override fun onStart() {
+        super.onStart()
+        // Atualiza o email sempre que o activity estiver visível
+        updateNavHeader()
+    }
+
+    private fun updateNavHeader() {
+        val headerView = navView.getHeaderView(0)
+        val userEmailTextView: TextView = headerView.findViewById(R.id.nav_header_email)
+        val currentUser = Firebase.auth.currentUser
+
+        if (currentUser != null) {
+            Log.d("MainActivity", "Usuário autenticado: ${currentUser.email}")
+            userEmailTextView.text = currentUser.email
+        } else {
+            Log.d("MainActivity", "Nenhum usuário está autenticado.")
+            userEmailTextView.text = "No email"
         }
     }
-    drawerLayout.closeDrawer(GravityCompat.START)
-    return true
-}
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, HomeFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit()
+                supportActionBar?.title = getString(R.string.menu_home)
+                supportActionBar?.setIcon(R.drawable.ic_menu_home)
+            }
+            R.id.nav_standings -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, StandingsFragment())
+                    .addToBackStack(null)
+                    .commit()
+                supportActionBar?.title = getString(R.string.menu_standings)
+                supportActionBar?.setIcon(R.drawable.ic_menu_standings)
+            }
+            R.id.nav_teams -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, TeamsFragment())
+                    .addToBackStack(null)
+                    .commit()
+                supportActionBar?.title = getString(R.string.menu_teams)
+                supportActionBar?.setIcon(R.drawable.ic_menu_teams)
+            }
+            R.id.nav_matches -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, MatchesFragment())
+                    .addToBackStack(null)
+                    .commit()
+                supportActionBar?.title = getString(R.string.menu_matches)
+                supportActionBar?.setIcon(R.drawable.ic_menu_matches)
+            }
+            R.id.nav_logout -> {
+                Firebase.auth.signOut()
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

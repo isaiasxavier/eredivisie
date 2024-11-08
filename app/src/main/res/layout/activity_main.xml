@@ -28,16 +28,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:navGraph="@navigation/mobile_navigation"
             app:defaultNavHost="true" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/matches_fragment_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/nav_host_fragment_content_main"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -48,24 +38,15 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/developerTextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <include
-                layout="@layout/nav_header_main" />
-
-            <TextView
-                android:id="@+id/developerTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Developed by Isaias Xavier"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:gravity="center"
-                android:padding="16dp"
-                android:layout_gravity="bottom" />
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:text="Developed by Isaias Xavier"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_gravity="bottom" />
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
