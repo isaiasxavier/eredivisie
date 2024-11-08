@@ -22,4 +22,5 @@
     <string name="click_to_register">Click to Register</string>
     <string name="logout">Logout</string>
     <string name="eredivisie_logo_desc">eredivisie_logo</string>
+    <string name="standings_home">standings_home</string>
 </resources>

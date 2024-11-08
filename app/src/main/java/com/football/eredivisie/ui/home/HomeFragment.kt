@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.football.eredivisie.R
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.football.eredivisie.R
 import com.football.eredivisie.databinding.FragmentHomeBinding
 import com.football.eredivisie.ui.standings.StandingsFragment
 
@@ -28,6 +29,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Carregar a imagem usando Glide
+        Glide.with(this)
+            .load(R.drawable.standings_home_png)
+            .into(binding.standingsHome)
 
         binding.standingsHome.setOnClickListener {
             parentFragmentManager.beginTransaction()
